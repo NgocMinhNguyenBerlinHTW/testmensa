@@ -5,39 +5,6 @@ import {useRouter} from 'next/router';
 
 console.log('test');
 
-export const getStaticPaths = async () => {
-    const res = await fetch('https://openmensa.org/api/v2/canteens');
-    const data = await res.json();
-
-    const paths = data.map(mensa => {
-        return {
-            params: { id: mensa.id.toString() }
-        }
-    })
-
-    return {
-        paths,
-        fallback: false
-    }
-
-}
-
-export const getStaticProps = async (context) => {
-    const id = context.params.id;
-    const res = await fetch('https://openmensa.org/api/v2/canteens/' + id );
-    const data = await res.json();
-
-    return {
-        props: { mensa: data }
-    }
-}
-
-
-
-
-
-
-
 
 const Test = () => {
     const current = new Date();
